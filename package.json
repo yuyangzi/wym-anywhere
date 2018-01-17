@@ -1,0 +1,33 @@
+{
+    "name": "wym-anywhere",
+    "version": "1.0.0",
+    "description": "一个基于NodeJS的静态HTTP服务",
+    "main": "build/index.js",
+    "scripts": {
+        "lint": "eslint .",
+        "fix": "eslint --fix"
+    },
+    "pre-commit": [
+        "fix",
+        "lint"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/yuyangzi/wym-anywhere.git"
+    },
+    "keywords": [
+        "node",
+        "static",
+        "server",
+        "http"
+    ],
+    "author": "王宜明",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/yuyangzi/wym-anywhere/issues"
+    },
+    "homepage": "https://github.com/yuyangzi/wym-anywhere#readme",
+    "dependencies": {
+        "pre-commit": "^1.2.2"
+    }
+}

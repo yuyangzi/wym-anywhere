@@ -57,3 +57,10 @@ typings/
 # dotenv environment variables file
 .env
 
+# IDE
+.idea/
+.vscode/
+.DS_Store
+*.swp
+build/
+npm-debug.log*
