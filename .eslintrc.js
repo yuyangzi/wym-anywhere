@@ -22,7 +22,10 @@ module.exports = {
         "semi": [
             "error",
             "always"
-        ]
+        ],
+        "no-console": ["error", {
+            "allow": ["warn", "error", "info"]
+        }]
     },
     "parser": "babel-eslint",
     "parserOptions": {
