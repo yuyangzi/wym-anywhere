@@ -15,6 +15,8 @@ const conf = require('../config/defaultConfig');
 
 const mime = require('../helper/mime');
 
+const compress = require('../helper/compress');
+
 // 文件夹目录显示模板
 const dirTemplate = Handlebars.compile(source);
 
@@ -25,7 +27,11 @@ module.exports = async function (req, res, filePath) {
             res.statusCode = 200;
             const mimeType = mime(filePath);
             res.setHeader('Content-Type', `${mimeType}; charset=UTF-8`);
-            fs.createReadStream(filePath).pipe(res);
+            let rs = fs.createReadStream(filePath);
+            if (filePath.match(conf.compress)) {
+                rs = compress(rs, req, res);
+            }
+            rs.pipe(res);
         } else if (stats.isDirectory()) {
             const files = await readdir(filePath);
             res.statusCode = 200;
