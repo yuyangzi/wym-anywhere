@@ -33,6 +33,5 @@ module.exports = {
         "sourceType": "script"
     },
     "globals": {
-
     }
 };

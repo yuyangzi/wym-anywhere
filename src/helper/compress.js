@@ -1,9 +1,11 @@
+// 压缩模块
 const {
     createGzip,
     createDeflate
 } = require('zlib');
 
 module.exports = (rs, req, res) => {
+    // 获取浏览器支持的解压算法
     const acceptEncoding = req.headers['accept-encoding'];
     if (!acceptEncoding || !acceptEncoding.match(/\b(gzip|deflate)/)) {
         return rs;

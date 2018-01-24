@@ -1,3 +1,5 @@
+// 处理range请求模块
+
 module.exports = (totalSize, req, res) => {
     const range = req.headers['range'];
     if (!range) {

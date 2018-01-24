@@ -4,6 +4,7 @@ const path = require('path');
 // 自定义的配置文件
 const conf = require('./config/defaultConfig');
 
+// chalk 第三方模块, 用于在终端中输出带颜色的信息
 const chalk = require('chalk');
 
 // 路由文件
@@ -19,6 +20,7 @@ class Server {
 
     start() {
         const server = http.createServer((req, res) => {
+            // 使用path.join 拼接路径
             const filePath = path.join(this.conf.root, req.url);
             route(req, res, filePath, this.conf);
         });

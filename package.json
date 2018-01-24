@@ -1,7 +1,7 @@
 {
     "name": "wym-anywhere",
-    "version": "0.1.1",
-    "description": "一个基于NodeJS的静态HTTP服务",
+    "version": "0.1.2",
+    "description": "一个基于NodeJS的静态HTTP服务器",
     "main": "src/app.js",
     "bin": {
         "wym-anywhere": "bin/wym-anywhere"
@@ -22,7 +22,8 @@
         "node",
         "static",
         "server",
-        "http"
+        "http",
+        "cli"
     ],
     "author": "王宜明",
     "license": "ISC",

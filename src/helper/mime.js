@@ -1,3 +1,5 @@
+// 返回的MIME模块
+
 const path = require('path');
 
 const mimeType = {
