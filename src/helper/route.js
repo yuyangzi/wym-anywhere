@@ -11,8 +11,6 @@ const source = fs.readFileSync(path.join(tplPath, 'dir.html')).toString();
 // 模板引擎
 const Handlebars = require('handlebars');
 
-const conf = require('../config/defaultConfig');
-
 const mime = require('../helper/mime');
 
 const compress = require('../helper/compress');
@@ -24,7 +22,7 @@ const isFresh = require('../helper/cache');
 // 文件夹目录显示模板
 const dirTemplate = Handlebars.compile(source);
 
-module.exports = async function (req, res, filePath) {
+module.exports = async function (req, res, filePath, conf) {
     try {
         const stats = await stat(filePath);
         if (stats.isFile()) {

@@ -1,8 +1,11 @@
 {
     "name": "wym-anywhere",
-    "version": "1.0.0",
+    "version": "0.1.0",
     "description": "一个基于NodeJS的静态HTTP服务",
-    "main": "build/index.js",
+    "main": "src/app.js",
+    "bin": {
+        "wym-anywhere": "bin/wym-anywhere"
+    },
     "scripts": {
         "lint": "eslint .",
         "fix": "eslint --fix"
@@ -29,7 +32,8 @@
     "homepage": "https://github.com/yuyangzi/wym-anywhere#readme",
     "dependencies": {
         "chalk": "^2.3.0",
-        "handlebars": "^4.0.11"
+        "handlebars": "^4.0.11",
+        "yargs": "^11.0.0"
     },
     "devDependencies": {
         "babel-eslint": "^8.2.1",
