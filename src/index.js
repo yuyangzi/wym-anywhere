@@ -26,3 +26,4 @@ const argv = yargs.usage('wym-anywhere [options]')
 const server = new Server(argv);
 
 server.start();
+

@@ -19,6 +19,9 @@ const range = require('../helper/range');
 
 const isFresh = require('../helper/cache');
 
+// 设置Icon图标
+const setIcon = require('../helper/setIcon');
+
 // 文件夹目录显示模板
 const dirTemplate = Handlebars.compile(source);
 
@@ -57,7 +60,8 @@ module.exports = async function (req, res, filePath, conf) {
             }
             rs.pipe(res);
         } else if (stats.isDirectory()) {
-            const files = await readdir(filePath);
+            let files = await readdir(filePath);
+            files = await setIcon(filePath, files);
             res.statusCode = 200;
             res.setHeader('Content-Type', 'text/html; charset=UTF-8');
             const dir = path.relative(conf.root, filePath);

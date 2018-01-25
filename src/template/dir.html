@@ -11,14 +11,21 @@
         }
 
         a {
-            display: block;
+            display: flex;
             font-size: 20px;
+            align-items: center;
+        }
+
+        img {
+            width: 20px;
+            height: 20px;
+            padding-right: 5px;
         }
     </style>
 </head>
 <body>
 {{#each files}}
-<a href="{{../dir}}/{{this}}">{{this}}</a>
+<a href="{{../dir}}/{{this.name}}"> <img src="/icons/file_type_{{this.svg}}.svg" />  {{this.name}}</a>
 {{/each}}
 </body>
 </html>

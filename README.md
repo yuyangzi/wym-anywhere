@@ -1,17 +1,18 @@
 # wym-anywhere
 
-一个基于NodeJS的静态HTTP服务
+&emsp;&emsp;一个基于NodeJS的静态HTTP服务,使用ES6进行开发.其中使用了`async`和`await`异步函数.所以请使用nodev7.6以上的node版本
 
-## 安装
+## Install
 
-```
+```shell
 npm i -g wym-anywhere
 ```
 
 ## 使用方法
 
-```
-wym-anywhere # 把当前文件夹作为静态资源服务器跟目录
+```shell
+wym-anywhere
+# 把当前文件夹作为静态资源服务器跟目录
 
 wym-anywhere -p 8080
 # 设置端口号为 8080 默认为8000
