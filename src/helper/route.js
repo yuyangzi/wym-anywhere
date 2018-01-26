@@ -73,7 +73,6 @@ module.exports = async function (req, res, filePath, conf) {
             res.end(dirTemplate(data));
         }
     } catch (error) {
-        console.info(error);
         res.statusCode = 404;
         res.setHeader('Content-Type', 'text/plain; charset=UTF-8');
         res.end(`${filePath} 这个地址找不到\n 错误信息: \n${error}`);

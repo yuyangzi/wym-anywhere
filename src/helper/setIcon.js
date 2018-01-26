@@ -13,8 +13,8 @@ const icons = {
     'js': 'js',
     'json': 'json',
     'css': 'css',
-    'py': 'css',
-    'php': 'python',
+    'py': 'python',
+    'php': 'php',
     'mp4': 'video',
     'avi': 'video',
     'jpeg': 'image',
@@ -34,14 +34,15 @@ module.exports = async (_filePath, files) => {
         if (stats.isDirectory()) {
             return {
                 name: item,
-                svg: 'default_folder'
+                svg: path.join(__dirname, '../../icons', 'file_type_default_folder.svg'),
             };
         }
         if (stats.isFile()) {
             const ext = path.extname(filePath).split('.').pop().toLocaleLowerCase();
+            const svgPath = icons[ext] ? `file_type_${icons[ext]}.svg`  : 'file_type_default.svg';
             return {
                 name: item,
-                svg: icons[ext] || 'default'
+                svg: path.join(__dirname, '../../icons', svgPath),
             };
         }
     });

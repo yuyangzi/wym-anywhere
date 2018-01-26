@@ -20,8 +20,14 @@ class Server {
 
     start() {
         const server = http.createServer((req, res) => {
-            // 使用path.join 拼接路径
-            const filePath = path.join(this.conf.root, req.url);
+            let filePath;
+            if (req.url.endsWith('.svg')) {
+                // 如果是请求svg文件,则不拼接路径,svg已是绝对路径
+                filePath = req.url;
+            } else {
+                // 使用path.join 拼接路径
+                filePath = path.join(this.conf.root, req.url);
+            }
             route(req, res, filePath, this.conf);
         });
 
