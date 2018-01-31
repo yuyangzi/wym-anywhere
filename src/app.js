@@ -27,6 +27,7 @@ class Server {
             } else {
                 // 使用path.join 拼接路径
                 filePath = path.join(this.conf.root, req.url);
+                console.info(filePath);
             }
             route(req, res, filePath, this.conf);
         });
@@ -35,6 +36,12 @@ class Server {
             const addr = `http://${this.conf.hostname}:${this.conf.port}`;
             console.info(`node 服务运行在 ${chalk.green(addr)}`);
             openBrowser(addr);
+        });
+
+        server.on('error', (err) => {
+            if (err.code === 'EADDRINUSE') { // 端口已经被使用
+                console.info(chalk.red('这个端口【' + this.conf.port + '】已经被占用'));
+            }
         });
     }
 }

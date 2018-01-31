@@ -1,6 +1,6 @@
 {
     "name": "wym-anywhere",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "description": "一个基于NodeJS的静态HTTP服务器",
     "main": "src/app.js",
     "bin": {

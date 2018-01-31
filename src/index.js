@@ -2,6 +2,8 @@ const yargs = require('yargs');
 
 const Server = require('./app');
 
+const {getIPAddress} = require('./helper/util');
+
 const argv = yargs.usage('wym-anywhere [options]')
     .option('p', {
         alias: 'port',
@@ -11,7 +13,7 @@ const argv = yargs.usage('wym-anywhere [options]')
     .option('h', {
         alias: 'hostname',
         describe: 'host',
-        default: '127.0.0.1'
+        default: getIPAddress(),
     })
     .option('d', {
         alias: 'root',
