@@ -1,5 +1,7 @@
 # wym-anywhere
 
+[![npm version](https://badge.fury.io/js/wym-anywhere.svg)](https://badge.fury.io/js/wym-anywhere)
+
 &emsp;&emsp;一个基于NodeJS的静态HTTP服务,可以在本地和局域网中访问.随启随用
 
 &emsp;&emsp; **使用ES6进行开发.其中使用了`async`和`await`异步函数.所以请使用nodev7.6及以上的node版本**
