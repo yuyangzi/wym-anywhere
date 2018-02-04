@@ -25,6 +25,9 @@ const icons = {
     'rar': 'zip',
     'txt': 'text',
     'md': 'markdown',
+    'c': 'c',
+    'cpp': 'cpp',
+
 };
 
 module.exports = async (_filePath, files) => {
