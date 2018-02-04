@@ -34,7 +34,7 @@ module.exports = async (_filePath, files) => {
         if (stats.isDirectory()) {
             return {
                 name: item,
-                svg: path.join(__dirname, '../../icons', 'file_type_default_folder.svg'),
+                svg: 'file_type_default_folder.svg',
             };
         }
         if (stats.isFile()) {
@@ -42,7 +42,7 @@ module.exports = async (_filePath, files) => {
             const svgPath = icons[ext] ? `file_type_${icons[ext]}.svg`  : 'file_type_default.svg';
             return {
                 name: item,
-                svg: path.join(__dirname, '../../icons', svgPath),
+                svg: svgPath,
             };
         }
     });

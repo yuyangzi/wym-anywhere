@@ -1,3 +1,4 @@
+
 const http = require('http');
 const path = require('path');
 
@@ -23,11 +24,12 @@ class Server {
             let filePath;
             if (req.url.endsWith('.svg')) {
                 // 如果是请求svg文件,则不拼接路径,svg已是绝对路径
-                filePath = req.url;
+                const iconPath = path.join(__dirname, '../icons');
+                const svgFilename = path.basename(req.url);
+                filePath = path.join(iconPath, svgFilename);
             } else {
                 // 使用path.join 拼接路径
                 filePath = path.join(this.conf.root, req.url);
-                console.info(filePath);
             }
             route(req, res, filePath, this.conf);
         });

@@ -11,10 +11,7 @@ module.exports = {
             "error",
             4
         ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
+        "linebreak-style": 0,
         "quotes": [
             "error",
             "single"
@@ -24,7 +21,7 @@ module.exports = {
             "always"
         ],
         "no-console": ["error", {
-            "allow": ["warn", "error", "info"]
+            "allow": ["warn", "error", "info", "log"]
         }]
     },
     "parser": "babel-eslint",
@@ -32,6 +29,5 @@ module.exports = {
         "ecmaVersion": 6,
         "sourceType": "script"
     },
-    "globals": {
-    }
+    "globals": {}
 };
