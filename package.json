@@ -1,14 +1,15 @@
 {
     "name": "wym-anywhere",
-    "version": "0.2.3",
+    "version": "0.2.4",
     "description": "一个基于NodeJS的静态HTTP服务器",
     "main": "src/app.js",
     "bin": {
         "wym-anywhere": "bin/wym-anywhere"
     },
     "scripts": {
-        "lint": "eslint .",
-        "fix": "eslint --fix"
+        "start": "node src/index",
+        "lint": "eslint ./src",
+        "fix": "eslint --fix ./src"
     },
     "pre-commit": [
         "fix",
@@ -32,13 +33,29 @@
     },
     "homepage": "https://github.com/yuyangzi/wym-anywhere#readme",
     "dependencies": {
-        "chalk": "^2.3.0",
-        "handlebars": "^4.0.11",
-        "yargs": "^11.0.0"
+        "chalk": "^2.4.1",
+        "handlebars": "^4.1.1",
+        "yargs": "^11.1.0"
     },
     "devDependencies": {
-        "babel-eslint": "^8.2.1",
-        "eslint": "^4.15.0",
-        "pre-commit": "^1.2.2"
+        "eslint": "^5.16.0",
+        "eslint-config-airbnb-base": "^13.1.0",
+        "eslint-plugin-import": "^2.16.0",
+        "husky": "^0.14.3",
+        "lint-staged": "^8.1.5",
+        "pre-commit": "^1.2.2",
+        "prettier": "^1.16.4"
+    },
+    "lint-staged": {
+        "src/**/*.{js,ts,json,md}": [
+            "eslint --fix",
+            "prettier --single-quote --write",
+            "git add"
+        ]
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
     }
 }

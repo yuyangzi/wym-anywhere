@@ -1,49 +1,45 @@
 // 缓存模块
 
 const {
-    cache
+  cache,
 } = require('../config/defaultConfig');
 
 
 function refreshRes(stats, res) {
-    const {
-        maxAge,
-        expires,
-        cacheControl,
-        lateModifed,
-        etag
-    } = cache;
+  const {
+    maxAge,
+    expires,
+    cacheControl,
+    lateModified,
+    ETag,
+  } = cache;
 
-    if (expires) {
-        res.setHeader('Expires', (new Date(Date.now() + maxAge * 1000)).toUTCString());
-    }
+  if (expires) {
+    res.setHeader('Expires', (new Date(Date.now() + maxAge * 1000)).toUTCString());
+  }
 
-    if (cacheControl) {
-        res.setHeader('Cache-Control', `public, max-age=${maxAge}`);
-    }
+  if (cacheControl) {
+    res.setHeader('Cache-Control', `public, max-age=${maxAge}`);
+  }
 
-    if (lateModifed) {
-        res.setHeader('Last-Modifed', stats.mtime.toUTCString());
-    }
+  if (lateModified) {
+    res.setHeader('Last-Modifed', stats.mtime.toUTCString());
+  }
 
-    if (etag) {
-        res.setHeader('ETag', `${stats.size}-${stats.mtime.toUTCString()}`);
-    }
+  if (ETag) {
+    res.setHeader('ETag', `${stats.size}-${stats.mtime.toUTCString()}`);
+  }
 }
 
 module.exports = function isFresh(stats, req, res) {
-    refreshRes(stats, res);
+  refreshRes(stats, res);
 
-    const lateModifed = req.headers['if-modifed-since'];
-    const etag = req.headers['if-none-match'];
+  const lateModified = req.headers['if-modified-since'];
+  const etag = req.headers['if-none-match'];
 
-    if (!lateModifed && !etag) {
-        return false;
-    } else if (lateModifed && lateModifed !== res.getHeader('Late-Modifed')) {
-        return false;
-    } else if (etag && etag !== res.getHeader('ETag')) {
-        return false;
-    } else {
-        return true;
-    }
+  if (!lateModified && !etag) {
+    return false;
+  } if (lateModified && lateModified !== res.getHeader('Late-Modified')) {
+    return false;
+  } return !(etag && etag !== res.getHeader('ETag'));
 };

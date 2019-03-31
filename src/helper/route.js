@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
-const promisify = require('util').promisify;
+const { promisify } = require('util');
+
 const stat = promisify(fs.stat);
 const readdir = promisify(fs.readdir);
 
@@ -26,55 +27,55 @@ const setIcon = require('../helper/setIcon');
 const dirTemplate = Handlebars.compile(source);
 
 module.exports = async function (req, res, filePath, conf) {
-    try {
-        const stats = await stat(filePath);
-        if (stats.isFile()) {
-            const mimeType = mime(filePath);
-            res.setHeader('Content-Type', `${mimeType}; charset=UTF-8`);
+  try {
+    const stats = await stat(filePath);
+    if (stats.isFile()) {
+      const mimeType = mime(filePath);
+      res.setHeader('Content-Type', `${mimeType}; charset=UTF-8`);
 
-            if (isFresh(stats, req, res)) {
-                res.statusCode = 304;
-                res.end();
-                return;
-            }
+      if (isFresh(stats, req, res)) {
+        res.statusCode = 304;
+        res.end();
+        return;
+      }
 
-            let rs;
-            const {
-                code,
-                start,
-                end
-            } = range(stats.size, req, res);
-            if (code === 200) {
-                res.statusCode = 200;
-                rs = fs.createReadStream(filePath);
-            } else {
-                res.statusCode = 206;
-                rs = fs.createReadStream(filePath, {
-                    start,
-                    end
-                });
-            }
+      let rs;
+      const {
+        code,
+        start,
+        end,
+      } = range(stats.size, req, res);
+      if (code === 200) {
+        res.statusCode = 200;
+        rs = fs.createReadStream(filePath);
+      } else {
+        res.statusCode = 206;
+        rs = fs.createReadStream(filePath, {
+          start,
+          end,
+        });
+      }
 
-            if (filePath.match(conf.compress)) {
-                rs = compress(rs, req, res);
-            }
-            rs.pipe(res);
-        } else if (stats.isDirectory()) {
-            let files = await readdir(filePath);
-            files = await setIcon(filePath, files);
-            res.statusCode = 200;
-            res.setHeader('Content-Type', 'text/html; charset=UTF-8');
-            const dir = path.relative(conf.root, filePath);
-            const data = {
-                title: path.basename(filePath),
-                dir: dir ? `/${dir}` : '',
-                files
-            };
-            res.end(dirTemplate(data));
-        }
-    } catch (error) {
-        res.statusCode = 404;
-        res.setHeader('Content-Type', 'text/plain; charset=UTF-8');
-        res.end(`${filePath} 这个地址找不到\n 错误信息: \n${error}`);
+      if (filePath.match(conf.compress)) {
+        rs = compress(rs, req, res);
+      }
+      rs.pipe(res);
+    } else if (stats.isDirectory()) {
+      let files = await readdir(filePath);
+      files = await setIcon(filePath, files);
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'text/html; charset=UTF-8');
+      const dir = path.relative(conf.root, filePath);
+      const data = {
+        title: path.basename(filePath),
+        dir: dir ? `/${dir}` : '',
+        files,
+      };
+      res.end(dirTemplate(data));
     }
+  } catch (error) {
+    res.statusCode = 404;
+    res.setHeader('Content-Type', 'text/plain; charset=UTF-8');
+    res.end(`${filePath} 这个地址找不到\n 错误信息: \n${error}`);
+  }
 };
