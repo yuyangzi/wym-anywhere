@@ -1,8 +1,6 @@
 // 缓存模块
 
-const {
-  cache,
-} = require('../config/defaultConfig');
+const { cache } = require('../config/defaultConfig');
 
 
 function refreshRes(stats, res) {
@@ -39,7 +37,9 @@ module.exports = function isFresh(stats, req, res) {
 
   if (!lateModified && !etag) {
     return false;
-  } if (lateModified && lateModified !== res.getHeader('Late-Modified')) {
+  }
+  if (lateModified && lateModified !== res.getHeader('Late-Modified')) {
     return false;
-  } return !(etag && etag !== res.getHeader('ETag'));
+  }
+  return !(etag && etag !== res.getHeader('ETag'));
 };

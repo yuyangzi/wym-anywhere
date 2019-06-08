@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{title}}</title>
-    <style>
-        body {
-            margin: 30px;
-        }
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="ie=edge" http-equiv="X-UA-Compatible">
+  <title>{{title}}</title>
+  <style>
+    body {
+      margin: 30px;
+    }
 
-        a {
-            display: flex;
-            font-size: 20px;
-            align-items: center;
-        }
+    a {
+      display: flex;
+      font-size: 20px;
+      align-items: center;
+    }
 
-        img {
-            width: 20px;
-            height: 20px;
-            padding-right: 5px;
-        }
-    </style>
+    img {
+      width: 20px;
+      height: 20px;
+      padding-right: 5px;
+    }
+  </style>
 </head>
 <body>
 {{#each files}}
-<a href="{{../dir}}/{{this.name}}"> <img src="{{this.svg}}" />  {{this.name}}</a>
+<a href="{{../dir}}/{{this.name}}"> <img src="{{this.svg}}"/> {{this.name}}</a>
 {{/each}}
 </body>
 </html>
