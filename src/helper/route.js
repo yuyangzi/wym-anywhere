@@ -26,7 +26,7 @@ const setIcon = require('../helper/setIcon');
 // 文件夹目录显示模板
 const dirTemplate = Handlebars.compile(source);
 
-module.exports = async function(req, res, filePath, conf) {
+module.exports = async function (req, res, filePath, conf) {
   try {
     const stats = await stat(filePath);
     if (stats.isFile()) {
